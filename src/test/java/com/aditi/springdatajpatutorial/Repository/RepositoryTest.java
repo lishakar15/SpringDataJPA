@@ -3,6 +3,7 @@ package com.aditi.springdatajpatutorial.Repository;
 import com.aditi.springdatajpatutorial.Entity.Games;
 import com.aditi.springdatajpatutorial.Entity.Guardian;
 import com.aditi.springdatajpatutorial.Entity.Student;
+import com.aditi.springdatajpatutorial.Entity.Teacher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,11 +13,13 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @SpringBootTest
-class StudentRepositoryTest {
+class RepositoryTest {
     @Autowired
     public StudentRepository studentRepository;
     @Autowired
     public GamesRepository gamesRepository;
+    @Autowired
+    public TeacherRepository teacherRepository;
 
     @Test
     public void saveStudent() {
@@ -37,6 +40,14 @@ class StudentRepositoryTest {
         Date releaseDate = sdf.parse("2018-09-23");
         Games g = Games.builder().name("God of War").price(2500).releaseDate(releaseDate).build();
         gamesRepository.save(g);
+    }
+    @Test
+    public void saveTeacher()
+    {
+        Teacher t = Teacher.builder().name("Stephene").subject("AWS").age(31).build();
+        Teacher teacher = teacherRepository.save(t);
+        System.out.println(teacher);
+
     }
 
     @Test
@@ -91,7 +102,11 @@ class StudentRepositoryTest {
         List<Student> studentList = studentRepository.findByNameIn(li);
         System.out.println(studentList.toString());
     }
-
+    public void findByIdNotIn()
+    {
+        List<Student> li =  studentRepository.findByIdNotIn(Arrays.asList(101,102));
+        li.forEach(System.out::println);
+    }
     @Test
     public void getStudentsDesc() {
         List<Student> li = studentRepository.findByIdGreaterThanOrderByIdDesc(99);
@@ -138,6 +153,25 @@ class StudentRepositoryTest {
         List<Student> li = studentRepository.getAllStudentsNative();
         System.out.println(li);
     }
+
+    @Test
+    public void getNameUsingNative()
+    {
+        List<String> li = studentRepository.getNameUsingNative(101);
+        for(String str:li)
+        {
+            System.out.println(str);
+        }
+    }
+    @Test
+    public void getStudentNameUsingNativeAndParams()
+    {
+        Student s = studentRepository.getStudentNameUsingNativeAndParams("madhu@gmail.com","Neha");
+        System.out.println(s.toString());
+    }
+
+
+
 }
 
 

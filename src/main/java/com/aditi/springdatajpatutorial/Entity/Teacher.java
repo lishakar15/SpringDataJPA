@@ -2,6 +2,7 @@ package com.aditi.springdatajpatutorial.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Teacher {
     @SequenceGenerator(
             name = "teacher_sequence",
@@ -23,5 +25,6 @@ public class Teacher {
     private String name;
     @Column(name ="subjectName")
     private String subject;
+    private Integer age;
 
 }

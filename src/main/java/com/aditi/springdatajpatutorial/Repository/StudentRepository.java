@@ -3,6 +3,7 @@ import com.aditi.springdatajpatutorial.Entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     public List<Student> findByIdBetween(Integer i,Integer j);
     public List<Student> findByNameOrGuardianName(String name,String guardianName);
     public List<Student> findByNameIn(List<String> li);
+    public List<Student> findByIdNotIn(List<Integer> ids);
     public List<Student> findByIdGreaterThanOrderByIdDesc(Integer i);
     public List<Student> findAllByOrderByIdDesc();
     public List<Student> findStudentByName(String name);
@@ -32,7 +34,18 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     //Native Queries
     @Query(value = "select * from student_info where name =?1",nativeQuery = true)
     public Student getStudentDetailsUsingNative(String name);
-    @Query(value = "select * from student_info",nativeQuery = true)//Get all the rows from the table
+    //Get all the rows from the table using Native
+    @Query(value = "select * from student_info",nativeQuery = true)
     public List<Student> getAllStudentsNative();
+    //Getting only name
+    @Query(value="select name from student_info where id >?1",nativeQuery = true)
+    public List<String> getNameUsingNative(Integer id);
+
+    //Using Named Params to set values
+    @Query(value = "select * from student_info where student_email =:sEmail and guardian_name = :gName", nativeQuery =
+            true)
+    public Student getStudentNameUsingNativeAndParams(@Param("sEmail") String email, @Param("gName")String name);
+
+
 
 }
