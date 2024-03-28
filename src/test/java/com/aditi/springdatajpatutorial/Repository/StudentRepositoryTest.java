@@ -115,6 +115,29 @@ class StudentRepositoryTest {
     List<Student> li=  studentRepository.getStudentBetweenIds(101,103);
         System.out.println(li);
     }
+    @Test
+    public void getStudentWithTheirEmailId(){
+        Student s = studentRepository.getStudentByTheirEmailId("madhu@gmail.com");
+        System.out.println(s.toString());
+    }
+    @Test
+    public void updateStudentEmailId()
+    {
+        studentRepository.updateStudentEmailId("madhu@gmail.com",102);
+    }
+
+    @Test
+    public void getStudentDetailsUsingNative()
+    {
+        Student s = studentRepository.getStudentDetailsUsingNative("Luna");
+        System.out.println(s.toString());
+    }
+    @Test
+    public void getAllStudentsNative()
+    {
+        List<Student> li = studentRepository.getAllStudentsNative();
+        System.out.println(li);
+    }
 }
 
 
