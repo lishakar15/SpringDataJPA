@@ -11,19 +11,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Teacher {
+public class Person {
+    @Id
     @SequenceGenerator(
-            name = "teacher_sequence",
-            sequenceName = "teacher_sequence"
+            name ="person_sequence",
+            sequenceName = "person_seq"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "teacher_sequence"
+            generator = "person_sequence"
     )
-    @Id
-    private int id;
+    private Integer personId;
     private String name;
-    private String subjectExpert;
-    private Integer age;
 
 }

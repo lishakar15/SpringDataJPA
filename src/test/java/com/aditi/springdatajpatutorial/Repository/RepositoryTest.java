@@ -44,7 +44,7 @@ class RepositoryTest {
     @Test
     public void saveTeacher()
     {
-        Teacher t = Teacher.builder().name("Stephene").subject("AWS").age(31).build();
+        Teacher t = Teacher.builder().name("Mark").subjectExpert("AWS").age(35).build();
         Teacher teacher = teacherRepository.save(t);
         System.out.println(teacher);
 
@@ -168,6 +168,12 @@ class RepositoryTest {
     {
         Student s = studentRepository.getStudentNameUsingNativeAndParams("madhu@gmail.com","Neha");
         System.out.println(s.toString());
+    }
+
+    @Test
+    public void insertTeacherData()
+    {
+        teacherRepository.insertTeacherData(15,"Kenny","Physics",29);
     }
 
 
