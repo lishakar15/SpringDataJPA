@@ -30,7 +30,7 @@ public class UserProfile {
     private String name;
     private Integer age;
     private String country;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="user_id")
     private User user;
 

@@ -2,10 +2,7 @@ package com.aditi.springdatajpatutorial.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.lang.reflect.GenericArrayType;
 import java.util.List;
@@ -32,6 +29,6 @@ public class Parent {
     private Integer parentId;
     private String parentName;
     private Integer parentAge;
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent",cascade = CascadeType.REMOVE)
     private List<Children> children;
 }

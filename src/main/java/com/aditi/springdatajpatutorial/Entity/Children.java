@@ -32,6 +32,6 @@ public class Children {
     private Integer childId;
     private String childName;
     private Integer childAge;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Parent parent;
 }
